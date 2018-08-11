@@ -1,4 +1,7 @@
 #TODO
-1. get share of NPLs in 2018 by regin, and compare to share of national gdp
+
 2. Get plot, by region and year, of npl auction volume
-3. Track trends by industry? Using my own classification method to find real estate developers?
+3. QA checks on conversion from raw to clean data.
+	a) spot checks
+	b) histogram - why so many at a few price points?
+4. Compare data to historical Great Wall Data
