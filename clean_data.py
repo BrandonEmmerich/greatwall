@@ -34,9 +34,32 @@ def clean_price(raw_price):
 
     return df['price_clean']
 
+def get_region(input_string):
+    """Map province to region"""
+    rust_belt = '河北|陕西|山西|内蒙古'
+    north_east = '天津|黑龙江|吉林|辽宁'
+    middle = '四川|湖南|江西|重庆|河南|湖北|安徽'
+    coast = '北京|山东|福建|海南|江苏|上海|广东|浙江'
+    west = '广西|云南|贵州|甘肃|新疆|青海|宁夏'
+
+    if input_string in rust_belt:
+        region = 'Rust Belt'
+    elif input_string in middle:
+        region = 'Populous Middle'
+    elif input_string in coast:
+        region = "Prosperous Coast"
+    elif input_string in north_east:
+        region = "Northeast"
+    elif input_string in west:
+        region = "Autonomous West"
+    else:
+        region = "NA"
+
+    return region
+
 df = pd.read_csv("./data/data_raw.csv")
 df['price_clean'] = clean_price(df.MoneyTotal)
+df['region'] = df['CityName'].astype(str).map(get_region)
+df['year'] = df.ADate.str.slice(0,4)
 
 df.to_csv('./data/data_clean.csv', encoding = 'utf-8')
-
-import ipdb; ipdb.set_trace()
